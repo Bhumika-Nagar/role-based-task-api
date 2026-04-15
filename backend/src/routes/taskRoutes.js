@@ -35,7 +35,7 @@ taskRouter.get("/", async (req, res) => {
     let tasks;
 
     if (req.user.role === "admin") {
-      tasks = await Task.find().populate("user", "name email");
+      tasks = await Task.find().populate("user", "username email");
     } else {
       tasks = await Task.find({ user: req.user.id });
     }
