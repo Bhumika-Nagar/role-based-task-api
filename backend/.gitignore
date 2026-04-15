@@ -1,0 +1,78 @@
+# 📦 Node modules
+
+node_modules/
+
+# 🔐 Environment variables (VERY IMPORTANT)
+
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 🛠 Logs
+
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 🧪 Coverage reports
+
+coverage/
+
+# 🚀 Build output
+
+dist/
+build/
+
+# 🔄 Runtime files
+
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# 🗂 OS files
+
+.DS_Store
+Thumbs.db
+
+# 🧠 IDE / Editor files
+
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 📦 Dependency directories (optional)
+
+jspm_packages/
+
+# 🔥 Optional: dotenv config backup
+
+.env.backup
+
+# 🧾 Temporary files
+
+tmp/
+temp/
+
+# 🐳 Docker (if you add later)
+
+.dockerignore
+
+# 🧪 Testing
+
+.nyc_output
+
+# 📁 Misc
+
+*.tgz
+*.gz
+*.zip
+
+# 🔑 Private keys (extra safety)
+
+*.pem
