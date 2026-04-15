@@ -16,7 +16,7 @@ return jwt.sign(
 
 userRouter.post("/signup",async(req,res)=>{
     try{
-    const {email, name, password, role} = req.body;
+    const {email, username, password, role} = req.body;
 
     const { success }= registerSchema.safeParse(req.body);
     if(!success){
@@ -37,7 +37,7 @@ userRouter.post("/signup",async(req,res)=>{
     const hashedPassowrd= await bcrypt.hash(password,10);
     const user= await User.create({
         email,
-        name,
+        username,
         password:hashedPassowrd,
         role
     });
@@ -51,6 +51,7 @@ userRouter.post("/signup",async(req,res)=>{
     })
     }catch (err) {
     res.status(500).json({ msg: err.message });
+    
     }
 });
 
