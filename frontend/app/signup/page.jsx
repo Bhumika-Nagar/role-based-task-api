@@ -15,13 +15,16 @@ export default function Signup() {
   const [role, setRole] = useState("");
   const router = useRouter();
 
-  const handleSignup = async () => {
-  try {
-    const handleLogin = async (e) => {
+  const handleSignup = async (e) => {
   e.preventDefault();
 
   try {
-    const res = await API.post("signup", form);
+    const res = await API.post("/auth/signup", {
+      email,
+      username,
+      password,
+      role
+    });
 
     console.log("LOGIN RESPONSE:", res.data);
 
@@ -37,13 +40,7 @@ export default function Signup() {
     console.error(err);
   }
 };
-  
 
-  } catch (error) {
-    console.error(error.response?.data || "signup failed");
-  }
-
-  };
 
   return (
     <Card title="Create Account">

@@ -20,7 +20,7 @@ export default function Dashboard() {
     const fetchTasks = async () => {
       try {
         const res = await API.get("/tasks");
-        setTasks(res.data.tasks);
+        setTasks(res.data);
       } catch (err) {
         console.error(err);
       }
@@ -31,7 +31,7 @@ export default function Dashboard() {
 
   
   const handleChange = (e) => {
-    const key = e.target.getAttribute("name");
+    const key = e.target.name;
 
     setForm({
       ...form,
@@ -43,12 +43,12 @@ export default function Dashboard() {
   const handleAddTask = async (e) => {
     e.preventDefault();
 
-    if (!form.title || !form.description) return;
+    if (!form.title.trim() || !form.description.trim()) return;
 
     try {
-      const res = await API.post("/tasks", form);
-
-      setTasks([res.data.task, ...tasks]);
+      const res = await API.post("/tasks",form);
+      
+      setTasks((prev) => [res.data, ...prev]);
 
       setForm({
         title: "",
@@ -58,6 +58,39 @@ export default function Dashboard() {
       console.error(err);
     }
   };
+
+  const handleDelete = async (id) => {
+  try {
+    await API.delete(`/tasks/${id}`);
+
+    setTasks((prev) => prev.filter((task) => task._id !== id));
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+  const handleEdit = async (id) => {
+  const newTitle = prompt("Enter new title:");
+  const newDescription = prompt("Enter new description:");
+
+  if (!newTitle || !newDescription) return;
+
+  try {
+    const res = await API.put(`/tasks/${id}`, {
+      title: newTitle,
+      description: newDescription,
+    });
+
+    setTasks((prev) =>
+      prev.map((task) =>
+        task._id === id ? res.data : task
+      )
+    );
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-900 p-6">
@@ -95,10 +128,12 @@ export default function Dashboard() {
         ) : (
           tasks.map((task) => (
             <TaskCard
-              key={task.id}
+              key={task._id || task.id}
               title={task.title}
               description={task.description}
               status={task.status}
+              onEdit={()=> handleEdit(task._id)}
+              onDelete={()=> handleDelete(task._id)}
             />
           ))
         )}
