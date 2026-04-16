@@ -91,6 +91,23 @@ export default function Dashboard() {
   }
 };
 
+const handleToggleStatus = async (id, currentStatus) => {
+  try {
+    const newStatus = currentStatus === "pending" ? "completed" : "pending";
+
+    const res = await API.put(`/tasks/${id}`, {
+      status: newStatus,
+    });
+
+    setTasks((prev) =>
+      prev.map((task) =>
+        task._id === id ? { ...task, status: newStatus } : task
+      )
+    );
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   return (
     <div className="min-h-screen bg-gray-900 p-6">
@@ -128,12 +145,13 @@ export default function Dashboard() {
         ) : (
           tasks.map((task) => (
             <TaskCard
-              key={task._id || task.id}
+              key={task._id}
               title={task.title}
               description={task.description}
               status={task.status}
               onEdit={()=> handleEdit(task._id)}
               onDelete={()=> handleDelete(task._id)}
+              onToggle={()=> handleToggleStatus(task._id, task.status)}
             />
           ))
         )}
