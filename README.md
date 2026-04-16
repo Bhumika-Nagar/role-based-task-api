@@ -1,5 +1,7 @@
 # Role-Based Task API with Frontend
 
+POSTMAN COLLECTION: https://www.postman.com/bhumikanagar100-4703655/role-based-task-api/collection/cl0ycb0/new-collection?action=share&source=copy-link&creator=50917940
+
 ## Overview
 
 This project is a scalable REST API with authentication and role-based access control, along with a minimal frontend for testing and interacting with the APIs.
@@ -131,6 +133,13 @@ Authorization: Bearer <your_token>
 
 Zod is used for validating request payloads for both authentication and task operations.
 
+## Scalability
+
+* Modular architecture allows easy addition of new features without affecting existing code
+* Stateless JWT authentication enables horizontal scaling across multiple servers
+* Database can be optimized using indexing and caching (e.g., Redis)
+* Can be extended to microservices by separating auth and task services
+* Deployment-ready with environment-based configuration and load balancing support
 
 ## Author
 
