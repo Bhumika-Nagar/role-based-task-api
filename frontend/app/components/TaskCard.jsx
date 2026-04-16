@@ -1,7 +1,7 @@
 import Card from "./Card";
 import Button from "./Button";
 
-export default function TaskCard({ title, description, status }) {
+export default function TaskCard({ title, description, status,onDelete,onEdit }) {
   const statusColor =
     status === "completed"
       ? "bg-green-600"
@@ -21,8 +21,8 @@ export default function TaskCard({ title, description, status }) {
       <p className="text-gray-400 text-sm">{description}</p>
 
       <div className="flex justify-end space-x-2">
-        <Button className="bg-blue-500 hover:bg-blue-600">Edit</Button>
-        <Button className="bg-red-500 hover:bg-red-600">Delete</Button>
+        <Button onClick={onEdit} className="bg-blue-500 hover:bg-blue-600">Edit</Button>
+        <Button onClick={onDelete}className="bg-red-500 hover:bg-red-600">Delete</Button>
       </div>
     </Card>
   );
