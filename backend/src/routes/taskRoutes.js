@@ -75,6 +75,7 @@ taskRouter.get("/:id", async (req, res) => {
 
 taskRouter.put("/:id", async (req, res) => {
     try {
+    
     const data= updateTaskSchema.parse(req.body);
     const task = await Task.findById(req.params.id);
 

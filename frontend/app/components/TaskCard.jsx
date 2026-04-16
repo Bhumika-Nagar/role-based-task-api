@@ -1,7 +1,7 @@
 import Card from "./Card";
 import Button from "./Button";
 
-export default function TaskCard({ title, description, status,onDelete,onEdit }) {
+export default function TaskCard({ title, description, status,onDelete,onEdit, onToggle }) {
   const statusColor =
     status === "completed"
       ? "bg-green-600"
@@ -13,9 +13,13 @@ export default function TaskCard({ title, description, status,onDelete,onEdit })
     <Card className="flex flex-col space-y-3">
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold text-white">{title}</h2>
-        <span className={`text-xs px-2 py-1 rounded ${statusColor}`}>
-          {status}
-        </span>
+      <button
+          onClick={onToggle}
+          className={`text-xs px-2 py-1 rounded cursor-pointer ${statusColor}`}
+        >
+        {status}
+      </button>  
+          
       </div>
 
       <p className="text-gray-400 text-sm">{description}</p>
